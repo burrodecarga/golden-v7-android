@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase'
 import { formatDate, formatTime } from '@/utils/date-utils'
 import { router } from 'expo-router'
 import React, { useState } from 'react'
-import { Alert, StyleSheet, Switch, Text, View } from 'react-native'
+import { Alert, StyleSheet, Switch, View } from 'react-native'
 import Button from '../Button'
 
 export interface CargaItemProps {
@@ -89,8 +89,9 @@ const DetalleDeServicio=({ items, ver }: CargaItemProps) => {
                     <ThemedText type='default'>{items?.destino}</ThemedText>
 
                 </View>
-                <View>
-                    <Text>Observaciones:{items?.observaciones}{items.position}</Text>
+                <View style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'baseline', gap: 2 }}>
+                    <ThemedText type='subtitle'>Observaciones:</ThemedText>
+                    <ThemedText numberOfLines={4} adjustsFontSizeToFit style={{ textAlign: 'justify', lineHeight: 13 }}>{items?.observaciones}XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYMMMMMMMMMMM Bergacion Mochuelo BBBBBBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</ThemedText>
                 </View>
             </View>
             <View style={{ gap: 18 }}>
@@ -100,8 +101,8 @@ const DetalleDeServicio=({ items, ver }: CargaItemProps) => {
                 <ThemedButton icon='location-outline' onPress={() => router.push({ pathname: "/", params: { id, doc: 'BOL' } })} disabled={items.position===3}>Registrar Gasto</ThemedButton>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <ThemedButton icon='logo-usd' onPress={() => registrarCobro(id)} disabled={items.position===3}> Registrar cobro</ThemedButton>
-                    <View style={{ backgroundColor: primary, paddingHorizontal: 10, borderRadius: 8 }}>
-
+                    <View style={{ backgroundColor: primary, paddingHorizontal: 10, borderRadius: 8, flexDirection: 'row', alignItems: 'center', gap: 4, justifyContent: 'space-between' }}>
+                        <ThemedText style={{ color: 'white' }}>{checked? 'Efectivo':'Cheque'}</ThemedText>
                         <Switch
                             trackColor={{ false: '#767577', true: '#81b0ff' }}
                             thumbColor={checked? '#f5dd4b':'#f4f3f4'}
